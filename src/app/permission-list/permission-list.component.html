@@ -1,0 +1,14 @@
+<mat-card>
+  <mat-card-header><h1>Permission List</h1></mat-card-header>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let permission of permissions">
+        {{permission.value}} - {{permission.description}}
+        <a mat-button [routerLink]="['/permission-edit', permission.id]">Edit</a>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+
+  <button mat-fab color="primary" [routerLink]="['/permission-add']">Add</button>
+
+</mat-card>

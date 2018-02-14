@@ -1,0 +1,14 @@
+<mat-card>
+  <mat-card-header><h1>Role List</h1></mat-card-header>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let role of roles">
+        {{role.name}}
+        <a mat-button [routerLink]="['/role-edit', role.id]">Edit</a>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+
+  <button mat-fab color="primary" [routerLink]="['/role-add']">Add</button>
+
+</mat-card>
