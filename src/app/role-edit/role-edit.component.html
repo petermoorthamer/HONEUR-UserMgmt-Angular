@@ -9,6 +9,7 @@
         <input matInput placeholder="Role Name" [(ngModel)]="role.name"
                required name="name" #name>
       </mat-form-field>
+      <app-role-permission-list [role]="role"></app-role-permission-list>
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button color="primary" type="submit"
@@ -22,13 +23,3 @@
   </form>
 </mat-card>
 
-<mat-card>
-  <mat-card-header><h3>Role permissions</h3></mat-card-header>
-  <mat-card-content>
-    <mat-list>
-      <mat-list-item *ngFor="let rolePermission of role.rolePermissions">
-        {{rolePermission._links.permission.href}}
-      </mat-list-item>
-    </mat-list>
-  </mat-card-content>
-</mat-card>

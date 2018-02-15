@@ -6,6 +6,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {
   MatButtonModule,
   MatCardModule,
+  MatCheckboxModule,
   MatInputModule,
   MatListModule,
   MatTableModule,
@@ -23,6 +24,7 @@ import {PermissionListComponent} from './permission-list/permission-list.compone
 import {PermissionEditComponent} from './permission-edit/permission-edit.component';
 import {PermissionService} from "./permission.service";
 import {UserRoleListComponent} from './user-role-list/user-role-list.component';
+import {RolePermissionListComponent} from './role-permission-list/role-permission-list.component';
 
 
 const appRoutes: Routes = [
@@ -75,7 +77,8 @@ const appRoutes: Routes = [
     RoleEditComponent,
     PermissionListComponent,
     PermissionEditComponent,
-    UserRoleListComponent
+    UserRoleListComponent,
+    RolePermissionListComponent
   ],
   imports: [
     BrowserModule,
@@ -86,6 +89,7 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatCardModule,
     MatInputModule,
+    MatCheckboxModule,
     MatListModule,
     MatToolbarModule,
     MatTableModule

@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
+import {environment} from '../environments/environment';
 import {Role} from "./role";
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch';
@@ -12,9 +13,13 @@ const httpOptions = {
 @Injectable()
 export class RoleService {
 
-  private apiUrl = '//localhost:9095/roles';
+  private apiUrl = environment.roleServiceUrl;
 
   constructor(private http: HttpClient) {
+  }
+
+  getApiUrl(): string {
+    return this.apiUrl;
   }
 
   getAll(): Observable<any> {

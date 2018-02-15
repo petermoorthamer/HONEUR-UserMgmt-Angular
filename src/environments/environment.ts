@@ -4,5 +4,8 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  userServiceUrl: 'http://localhost:9095/users',
+  roleServiceUrl: 'http://localhost:9095/roles',
+  permissionServiceUrl: 'http://localhost:9095/permissions'
 };

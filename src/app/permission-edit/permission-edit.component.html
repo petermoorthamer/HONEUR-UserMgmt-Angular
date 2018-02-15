@@ -1,3 +1,28 @@
-<p>
-  permission-edit works!
-</p>
+<mat-card>
+  <form #permissionForm="ngForm" (ngSubmit)="save(permissionForm.value)">
+    <mat-card-header>
+      <mat-card-title><h2>{{permission.id ? 'Edit' : 'Add'}} Permission</h2></mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <input type="hidden" name="href" [(ngModel)]="permission.href">
+      <mat-form-field>
+        <input matInput placeholder="Permission Value" [(ngModel)]="permission.value"
+               required name="value" #value>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Permission Description" [(ngModel)]="permission.description"
+               required name="description" #description>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit"
+              [disabled]="!permissionForm.form.valid">Save</button>
+      <button mat-raised-button color="secondary" (click)="remove(permission.href)"
+              *ngIf="permission.href" type="button">Delete</button>
+      <a mat-button routerLink="/permission-list">Cancel</a>
+    </mat-card-actions>
+    <mat-card-footer>
+    </mat-card-footer>
+  </form>
+</mat-card>
+

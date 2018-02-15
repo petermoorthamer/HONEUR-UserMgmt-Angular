@@ -29,7 +29,7 @@ export class RoleEditComponent implements OnInit, OnDestroy {
             this.role = role;
             this.role.href = role._links.self.href;
           } else {
-            console.log(`User with id '${id}' not found, returning to list`);
+            console.log(`Role with id '${id}' not found, returning to list`);
             this.gotoList();
           }
         });

@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
+import {environment} from '../environments/environment';
 import {Permission} from "./permission";
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch';
@@ -12,13 +13,14 @@ const httpOptions = {
 @Injectable()
 export class PermissionService {
 
-  private apiUrl = '//localhost:9095/permissions';
+  private apiUrl = environment.permissionServiceUrl;
 
   constructor(private http: HttpClient) {
   }
 
   getAll(): Observable<any> {
-    return this.http.get(this.apiUrl)
+    // TODO make page size more dynamic
+    return this.http.get(this.apiUrl + '?size=50')
       .map((data: any) => {
         return data._embedded.permissions as Permission[];
       });

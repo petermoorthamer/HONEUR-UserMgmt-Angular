@@ -1,3 +1,7 @@
-<p>
-  user-role-list works!
-</p>
+<h3>User Roles</h3>
+<mat-list>
+  <mat-list-item *ngFor="let role of allRoles">
+    <mat-checkbox [checked]="hasRole(role.id)" (change)="selectRole($event, role.id)">{{role.name}}</mat-checkbox>
+  </mat-list-item>
+</mat-list>
+

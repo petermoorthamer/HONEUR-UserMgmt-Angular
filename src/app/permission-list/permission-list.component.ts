@@ -7,6 +7,7 @@ import {PermissionService} from '../permission.service';
   styleUrls: ['./permission-list.component.css']
 })
 export class PermissionListComponent implements OnInit {
+
   permissions: Array<any>;
 
   constructor(private permissionService: PermissionService) { }
