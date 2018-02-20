@@ -3,6 +3,8 @@ import {Subscription} from 'rxjs/Subscription';
 import {ActivatedRoute, Router} from '@angular/router';
 import {RoleService} from '../role.service';
 import {NgForm} from '@angular/forms';
+import {Role} from "../role";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-role-edit',
@@ -11,8 +13,7 @@ import {NgForm} from '@angular/forms';
 })
 export class RoleEditComponent implements OnInit, OnDestroy {
 
-  role: any = {};
-
+  role: Role;
   sub: Subscription;
 
   constructor(private route: ActivatedRoute,
@@ -21,13 +22,15 @@ export class RoleEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.role = new Role(null, null, [], []);
     this.sub = this.route.params.subscribe(params => {
       const id = params['id'];
       if (id) {
         this.roleService.get(id).subscribe((role: any) => {
           if (role) {
             this.role = role;
-            this.role.href = role._links.self.href;
+            //this.role.href = role._links.self.href;
+            this.role.href = environment.roleServiceUrl + '/' + id;
           } else {
             console.log(`Role with id '${id}' not found, returning to list`);
             this.gotoList();
@@ -46,7 +49,7 @@ export class RoleEditComponent implements OnInit, OnDestroy {
   }
 
   save(form: NgForm) {
-    this.roleService.save(form).subscribe(result => {
+    this.roleService.save(this.role).subscribe(result => {
       this.gotoList();
     }, error => console.error(error))
   }

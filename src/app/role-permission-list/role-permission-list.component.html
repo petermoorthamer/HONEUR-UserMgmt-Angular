@@ -1,0 +1,7 @@
+<h3>Role Permissions</h3>
+<mat-list>
+  <mat-list-item *ngFor="let permission of allPermissions">
+    <mat-checkbox [checked]="hasPermission(permission.id)" (change)="selectPermission($event, permission.id)">{{permission.description}}</mat-checkbox>
+  </mat-list-item>
+</mat-list>
+

@@ -3,6 +3,8 @@ import {Subscription} from 'rxjs/Subscription';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../user.service';
 import {NgForm} from '@angular/forms';
+import {environment} from "../../environments/environment";
+import {User} from "../user";
 
 @Component({
   selector: 'app-user-edit',
@@ -10,8 +12,8 @@ import {NgForm} from '@angular/forms';
   styleUrls: ['./user-edit.component.css']
 })
 export class UserEditComponent implements OnInit, OnDestroy {
-  user: any = {};
 
+  user: User;
   sub: Subscription;
 
   constructor(private route: ActivatedRoute,
@@ -20,13 +22,16 @@ export class UserEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.user = new User(null, null, null, []);
     this.sub = this.route.params.subscribe(params => {
       const id = params['id'];
       if (id) {
-        this.userService.get(id).subscribe((user: any) => {
+        this.userService.get(id).subscribe((user: User) => {
           if (user) {
+            console.log('UserEditComponent user: ' + JSON.stringify(user));
             this.user = user;
-            this.user.href = user._links.self.href;
+            //this.user.href = user._links.self.href;
+            this.user.href = environment.userServiceUrl + '/' + id;
           } else {
             console.log(`User with id '${id}' not found, returning to list`);
             this.gotoList();
@@ -45,7 +50,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
   }
 
   save(form: NgForm) {
-    this.userService.save(form).subscribe(result => {
+    this.userService.save(this.user).subscribe(result => {
       this.gotoList();
     }, error => console.error(error))
   }

@@ -3,6 +3,8 @@ import {NgForm} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {PermissionService} from "../permission.service";
 import {Subscription} from "rxjs/Subscription";
+import {Permission} from "../permission";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-permission-edit',
@@ -11,8 +13,7 @@ import {Subscription} from "rxjs/Subscription";
 })
 export class PermissionEditComponent implements OnInit {
 
-  permission: any = {};
-
+  permission: Permission;
   sub: Subscription;
 
   constructor(private route: ActivatedRoute,
@@ -21,13 +22,15 @@ export class PermissionEditComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.permission = new Permission(null, null,  null);
     this.sub = this.route.params.subscribe(params => {
       const id = params['id'];
       if (id) {
         this.permissionService.get(id).subscribe((permission: any) => {
           if (permission) {
             this.permission = permission;
-            this.permission.href = permission._links.self.href;
+            //this.permission.href = permission._links.self.href;
+            this.permission.href = environment.permissionServiceUrl + '/' + id;
           } else {
             console.log(`Permission with id '${id}' not found, returning to list`);
             this.gotoList();

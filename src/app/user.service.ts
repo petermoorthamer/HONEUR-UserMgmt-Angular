@@ -18,26 +18,28 @@ export class UserService {
   constructor(private http: HttpClient) {
   }
 
-  getApiUrl(): string {
-    return this.apiUrl;
-  }
-
-  getAll(): Observable<any> {
+  getAll(): Observable<User[]> {
       return this.http.get(this.apiUrl)
               .map((data: any) => {
-                return data._embedded.users as User[];
+                //return data._embedded.users as User[];
+                return data as User[];
               });
 
   }
 
-  get(id: string) {
-    return this.http.get(this.apiUrl + '/' + id);
+  get(id: string): Observable<User> {
+    return this.http.get(this.apiUrl + '/' + id)
+            .map((data: any) => {
+              return data as User;
+            });
   }
 
-  save(user: any): Observable<any> {
+  save(user: User): Observable<any> {
     let result: Observable<Object>;
     if (user['href']) {
-      result = this.http.put(user.href, user);
+    //if (user.id != null) {
+      //result = this.http.put(user._links.self.href, user);
+      result = this.http.patch(user['href'], user);
     } else {
       result = this.http.post(this.apiUrl, user);
     }

@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  userServiceUrl: 'http://localhost:9095/users',
-  roleServiceUrl: 'http://localhost:9095/roles',
-  permissionServiceUrl: 'http://localhost:9095/permissions'
+  userServiceUrl: 'http://localhost:9095/api/users',
+  roleServiceUrl: 'http://localhost:9095/api/roles',
+  permissionServiceUrl: 'http://localhost:9095/api/permissions'
 };

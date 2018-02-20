@@ -19,10 +19,10 @@ export class PermissionService {
   }
 
   getAll(): Observable<any> {
-    // TODO make page size more dynamic
-    return this.http.get(this.apiUrl + '?size=50')
+    return this.http.get(this.apiUrl)
       .map((data: any) => {
-        return data._embedded.permissions as Permission[];
+        //return data._embedded.permissions as Permission[];
+        return data as Permission[];
       });
 
   }
@@ -34,7 +34,7 @@ export class PermissionService {
   save(permission: any): Observable<any> {
     let result: Observable<Object>;
     if (permission['href']) {
-      result = this.http.put(permission.href, permission);
+      result = this.http.patch(permission.href, permission);
     } else {
       result = this.http.post(this.apiUrl, permission);
     }

@@ -3,8 +3,6 @@ import {User} from '../user';
 import {Role} from "../role";
 import {RoleService} from "../role.service";
 import {UserRole} from "../userRole";
-import {environment} from '../../environments/environment';
-import {Utilities} from "../utilities";
 
 @Component({
   selector: 'app-user-role-list',
@@ -15,7 +13,6 @@ export class UserRoleListComponent implements OnInit {
 
   @Input() user: User;
   allRoles: Role[];
-  userRoles: Role[];
 
   constructor(private roleService: RoleService) { }
 
@@ -48,8 +45,12 @@ export class UserRoleListComponent implements OnInit {
   }
 
   private findUserRole(roleId: number): UserRole {
+    if(this.user.userRoles == null) {
+      return null;
+    }
     for(let userRole of this.user.userRoles) {
-      if(Utilities.endsWith(userRole._links.role.href, '/' + roleId)) {
+      //if(Utilities.endsWith(userRole._links.role.href, '/' + roleId)) {
+      if(userRole.role.id == roleId) {
         return userRole;
       }
     }
@@ -57,12 +58,16 @@ export class UserRoleListComponent implements OnInit {
   }
 
   private addUserRole(roleId: number): void {
+    //this.user.addUserRole(this.createUserRole(roleId));
     this.user.userRoles.push(this.createUserRole(roleId));
   }
 
   private createUserRole(roleId: number): UserRole {
-    var links = UserRole.createLinks(environment.userServiceUrl, this.user.id, environment.roleServiceUrl, roleId);
-    return new UserRole(null, null, links);
+    //var links = UserRole.createLinks(environment.userServiceUrl, this.user.id, environment.roleServiceUrl, roleId);
+    let userRole = new UserRole(null, null, null);
+    userRole.user = this.user.id;
+    userRole.role = new Role(roleId, null, null, null);
+    return userRole;
   }
 
 }

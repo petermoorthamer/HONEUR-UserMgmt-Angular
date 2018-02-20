@@ -1,7 +1,11 @@
+import {Role} from "./role";
+
 export class UserRole {
 
   id: number;
   status: string;
+  user: number;
+  role: Role;
   _links : any;
 
   constructor(id: number, status: string, _links: any){

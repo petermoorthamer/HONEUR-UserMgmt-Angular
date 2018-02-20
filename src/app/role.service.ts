@@ -18,14 +18,11 @@ export class RoleService {
   constructor(private http: HttpClient) {
   }
 
-  getApiUrl(): string {
-    return this.apiUrl;
-  }
-
   getAll(): Observable<any> {
     return this.http.get(this.apiUrl)
       .map((data: any) => {
-        return data._embedded.roles as Role[];
+        //return data._embedded.roles as Role[];
+        return data as Role[];
       });
 
   }
@@ -37,7 +34,7 @@ export class RoleService {
   save(role: any): Observable<any> {
     let result: Observable<Object>;
     if (role['href']) {
-      result = this.http.put(role.href, role);
+      result = this.http.patch(role.href, role);
     } else {
       result = this.http.post(this.apiUrl, role);
     }
