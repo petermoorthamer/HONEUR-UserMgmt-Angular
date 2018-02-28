@@ -50,6 +50,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
   }
 
   save(form: NgForm) {
+    console.log('save user: user roles: ' + JSON.stringify(this.user.userRoles) + ', # = ' + this.user.userRoles.length);
     this.userService.save(this.user).subscribe(result => {
       this.gotoList();
     }, error => console.error(error))

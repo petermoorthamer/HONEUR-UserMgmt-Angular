@@ -1,4 +1,4 @@
-<mat-card>
+<!--<mat-card>
   <form #userForm="ngForm" (ngSubmit)="save(userForm.value)">
     <mat-card-header>
       <mat-card-title><h2>{{user.name ? 'Edit' : 'Add'}} User</h2></mat-card-title>
@@ -25,6 +25,42 @@
     <mat-card-footer>
     </mat-card-footer>
   </form>
-</mat-card>
+</mat-card>-->
+
+<div class="container" *ngIf="user">
+  <h3 class="text-primary">{{user.name ? 'Edit' : 'Add'}} User</h3>
+
+  <form #userForm="ngForm" (ngSubmit)="save(userForm.value)">
+    <input type="hidden" name="href" [(ngModel)]="user.href">
+    <div class="form-group" *ngIf="user.id">
+      <label for="id">ID:</label>
+      <input class="form-control" id="id" placeholder="User ID" [(ngModel)]="user.id" name="id" #id disabled>
+    </div>
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input class="form-control" id="name" placeholder="User Name" [(ngModel)]="user.name" required name="name" #name >
+    </div>
+    <div class="form-group">
+      <label for="login">Login:</label>
+      <input class="form-control" id="login" placeholder="Login" [(ngModel)]="user.login" required name="login" #login >
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" class="form-control" id="password" placeholder="Password" [(ngModel)]="user.password" name="password" #password >
+    </div>
+
+    <p> </p>
+
+    <app-user-role-list [user]="user"></app-user-role-list>
+
+    <p> </p>
+
+    <button class="btn btn-primary" type="submit" [disabled]="!userForm.form.valid">Save</button>
+    <button class="btn btn-secondary" (click)="remove(user.href)" *ngIf="user.href" type="button">Delete</button>
+    <a class="btn btn-light" routerLink="/user-list">Cancel</a>
+
+  </form>
+
+</div>
 
 

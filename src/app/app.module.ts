@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
-import {
+/*import {
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
@@ -11,7 +11,7 @@ import {
   MatListModule,
   MatTableModule,
   MatToolbarModule
-} from '@angular/material';
+} from '@angular/material';*/
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppComponent} from './app.component';
 import {UserService} from './user.service';
@@ -86,13 +86,13 @@ const appRoutes: Routes = [
     FormsModule,
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,
-    MatButtonModule,
+    /*MatButtonModule,
     MatCardModule,
     MatInputModule,
     MatCheckboxModule,
     MatListModule,
     MatToolbarModule,
-    MatTableModule
+    MatTableModule*/
   ],
   providers: [UserService, RoleService,PermissionService],
   bootstrap: [AppComponent]

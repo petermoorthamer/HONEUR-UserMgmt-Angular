@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<!--<mat-toolbar color="primary">
   <span>{{title}}</span>
 </mat-toolbar>
 
@@ -8,9 +8,37 @@
       <a class="nav-link" routerLink="role-list">Roles</a> -
       <a class="nav-link" routerLink="permission-list">Permissions</a>
   </span>
-  <!-- This fills the remaining space of the current row -->
   <span class="example-fill-remaining-space"></span>
 </mat-toolbar>
 
+<router-outlet></router-outlet>-->
+
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <div class="navbar-brand">
+        <img src="/assets/img/HONEUR_logo.png" width="200"/> {{title}}
+      </div>
+    </div>
+    <ul class="nav navbar-nav mr-xl-auto" routerLinkActive="active">
+      <li class="nav-item"><a class="nav-link" routerLink="user-list">Users</a></li>
+      <li class="nav-item"><a class="nav-link" routerLink="role-list">Roles</a></li>
+      <li class="nav-item"><a class="nav-link" routerLink="permission-list">Permissions</a></li>
+    </ul>
+  </div>
+</nav>
+
 <router-outlet></router-outlet>
+
+<p> </p>
+
+<!-- Footer -->
+<footer class="py-5">
+  <div class="container">
+    <p class="text-center">Copyright &copy; HONEUR 2018</p>
+  </div>
+</footer>
+
+
 

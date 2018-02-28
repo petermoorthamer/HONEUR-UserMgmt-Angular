@@ -30,8 +30,8 @@ export class RolePermissionListComponent implements OnInit {
   }
 
   selectPermission(event, permissionId) {
-    console.log('selectPermission: ' + permissionId);
-    if(event.checked) {
+    console.log('selectPermission: ' + permissionId + ': ' + event.target.checked);
+    if(event.target.checked) {
       this.addRolePermission(permissionId);
     } else {
       this.removeRolePermission(permissionId);

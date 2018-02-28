@@ -30,7 +30,8 @@ export class UserRoleListComponent implements OnInit {
   }
 
   selectRole(event, roleId) {
-    if(event.checked) {
+    console.log('selectRole: ' + roleId + ': ' + event.target.checked);
+    if(event.target.checked) {
       this.addUserRole(roleId);
     } else {
       this.removeUserRole(roleId);
@@ -41,6 +42,8 @@ export class UserRoleListComponent implements OnInit {
     let userRoleToBeDeleted = this.findUserRole(roleId);
     if(userRoleToBeDeleted != null) {
       this.user.userRoles = this.user.userRoles.filter(obj => obj !== userRoleToBeDeleted);
+      console.log(JSON.stringify(this.user.userRoles));
+      console.log('Size: ' + this.user.userRoles.length);
     }
   }
 
@@ -60,6 +63,8 @@ export class UserRoleListComponent implements OnInit {
   private addUserRole(roleId: number): void {
     //this.user.addUserRole(this.createUserRole(roleId));
     this.user.userRoles.push(this.createUserRole(roleId));
+    console.log(JSON.stringify(this.user.userRoles));
+    console.log('Size: ' + this.user.userRoles.length);
   }
 
   private createUserRole(roleId: number): UserRole {

@@ -1,4 +1,4 @@
-<mat-card>
+<!--<mat-card>
   <form #permissionForm="ngForm" (ngSubmit)="save(permissionForm.value)">
     <mat-card-header>
       <mat-card-title><h2>{{permission.id ? 'Edit' : 'Add'}} Permission</h2></mat-card-title>
@@ -24,5 +24,32 @@
     <mat-card-footer>
     </mat-card-footer>
   </form>
-</mat-card>
+</mat-card>-->
+
+<div class="container" *ngIf="permission">
+  <h3 class="text-primary">{{permission.id ? 'Edit' : 'Add'}} Permission</h3>
+
+  <form #permissionForm="ngForm" (ngSubmit)="save(permissionForm.value)">
+    <input type="hidden" name="href" [(ngModel)]="permission.href">
+    <div class="form-group" *ngIf="permission.id">
+      <label for="id">ID:</label>
+      <input class="form-control" id="id" placeholder="Permission ID" [(ngModel)]="permission.id" name="id" #id disabled>
+    </div>
+    <div class="form-group">
+      <label for="value">Value:</label>
+      <input class="form-control" id="value" placeholder="Permission Value" [(ngModel)]="permission.value" name="value" #value>
+    </div>
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <input class="form-control" id="description" placeholder="Permission Description" [(ngModel)]="permission.description" name="description" #description>
+    </div>
+
+    <p> </p>
+
+    <button class="btn btn-primary" type="submit" [disabled]="!permissionForm.form.valid">Save</button>
+    <button class="btn btn-secondary" (click)="remove(permission.href)" *ngIf="permission.href" type="button">Delete</button>
+    <a class="btn btn-light" routerLink="/permission-list">Cancel</a>
+
+  </form>
+</div>
 

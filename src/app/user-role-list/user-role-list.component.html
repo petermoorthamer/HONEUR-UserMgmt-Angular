@@ -1,7 +1,19 @@
-<h3>User Roles</h3>
+<!--<h3>User Roles</h3>
 <mat-list>
   <mat-list-item *ngFor="let role of allRoles">
     <mat-checkbox [checked]="hasRole(role.id)" (change)="selectRole($event, role.id)">{{role.name}}</mat-checkbox>
   </mat-list-item>
-</mat-list>
+</mat-list>-->
+
+<h4 class="text-secondary">User Roles</h4>
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let role of allRoles">
+    <div class="checkbox">
+      <label>
+          <input type="checkbox" [checked]="hasRole(role.id)" (change)="selectRole($event, role.id)"> {{role.name}}
+      </label>
+    </div>
+  </li>
+</ul>
+
 

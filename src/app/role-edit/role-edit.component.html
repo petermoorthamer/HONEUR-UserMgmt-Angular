@@ -1,4 +1,4 @@
-<mat-card>
+<!--<mat-card>
   <form #roleForm="ngForm" (ngSubmit)="save(roleForm.value)">
     <mat-card-header>
       <mat-card-title><h2>{{role.name ? 'Edit' : 'Add'}} Role</h2></mat-card-title>
@@ -21,5 +21,30 @@
     <mat-card-footer>
     </mat-card-footer>
   </form>
-</mat-card>
+</mat-card>-->
+
+<div class="container" *ngIf="role">
+  <h3 class="text-primary">{{role.name ? 'Edit' : 'Add'}} Role</h3>
+
+  <form #roleForm="ngForm" (ngSubmit)="save(roleForm.value)">
+    <input type="hidden" name="href" [(ngModel)]="role.href">
+    <div class="form-group" *ngIf="role.id">
+      <label for="id">ID:</label>
+      <input class="form-control" id="id" placeholder="Role ID" [(ngModel)]="role.id" name="id" #id disabled>
+    </div>
+    <div class="form-group">
+      <label for="name">Role:</label>
+      <input class="form-control" id="name" placeholder="Role Name" [(ngModel)]="role.name" required name="name" #name>
+    </div>
+
+    <p> </p>
+    <app-role-permission-list [role]="role"></app-role-permission-list>
+    <p> </p>
+
+    <button type="submit" class="btn btn-primary" [disabled]="!roleForm.form.valid">Save</button>
+    <button type="button" class="btn btn-secondary" (click)="remove(role.href)" *ngIf="role.href" >Delete</button>
+    <a class="btn btn-light" routerLink="/role-list">Cancel</a>
+
+  </form>
+</div>
 
